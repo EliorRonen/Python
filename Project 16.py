@@ -1,18 +1,22 @@
+
 import os
 
-def shutdown_computer(seconds):
+import argparse
 
-"""Shuts down the computer after a specified number of seconds."""
+def shutdown(seconds):
 
+    """Shuts down the system after the specified number of seconds."""
 
-print("Shutting down the computer in", seconds, "seconds...")
+    os.system(f"shutdown /s /t {seconds}")
 
-os.system("shutdown /s /t " + str(seconds))
+if __name__ == "__main__":
 
-# Ask the user how many seconds to wait before shutdown
+    parser = argparse.ArgumentParser(description="Shutdown the system.")
 
-seconds_to_wait = int(input("How many seconds before shutdown? "))
+    parser.add_argument("-t", "--time", type=int, default=0,
 
-# Call the shutdown function with the user's input
+                    help="Number of seconds before shutdown (default: 0)")
 
-shutdown_computer(seconds_to_wait)
+args = parser.parse_args()
+
+shutdown(args.time)
